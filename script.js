@@ -88,31 +88,74 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Function to prompt user for password options
-function getPasswordOptions() {
 
-}
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
 
 }
 
-// Function to generate password with user input
-function generatePassword() {
-
-}
-
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
+
+
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword);
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  var correctPrompt = getprompts (); //either true or false
   var passwordText = document.querySelector('#password');
+
+  if(correctPrompts) {
+var newPassword = generatePassword ();
+passwordTest.value = newPassword
+  }else {
+    passwordText.value ="";
+  }
 
   passwordText.value = password;
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
+// Function to generate password with user input
+function generatePassword() {
+
+}
+var password = "";
+for(var i = 0; i < characterLenght; i++) {
+  var randomIndex = Math.floor(Math.random() * choiceArr.lenght);
+  password = password + choiceArr[randomIndex];
+}
+return password;
+// Function to prompt user for password options
+function getPasswordOptions() {
+  choiceArr = []
+
+  let characterlength = parseInt(`How many characters do you want your password to have?`);
+  
+  if(isNaN(characterlength) || characterlength < 10 || characterlength > 65) {
+    alert("character length must be 10 - 65 digits. please try agian");
+  }
+  return false;
+  }
+  
+  //when is canceled, then I will ask to confirm the character they want to include in their password
+  if(confirm("Do you want lower case letters in your password")) {
+    choiceArr = choiceArr.concat(lowercaseArr);
+  }
+  
+  if(confirm("Do you want upper case letters in your password")) {
+    choiceArr = choiceArr.concat(uppercaseArr);
+  }
+  if(confirm("Do you want special characters in your password")) {
+    choiceArr = choiceArr.concat(specialArr);
+  }
+  
+  if(confirm("Do you want numbers in your password")) {
+    choiceArr = choiceArr.concat(numbersArr);
+  }
+  
+  return true;
+  
